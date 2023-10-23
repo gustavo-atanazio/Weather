@@ -1,12 +1,11 @@
 import { BiSearch } from 'react-icons/bi';
+import { TbDropletFilled } from 'react-icons/tb';
 import Lottie from 'lottie-react';
 
 import sun from './animations/sun.json';
 import './App.css';
 
 function App() {
-	const animationData = sun;
-
 	return (
 		<div className='main-container'>
 			<div className='container'>
@@ -23,17 +22,24 @@ function App() {
 				<div className='divisor'></div>
 
 				<div className='main-content'>
-					<h2>Toronto</h2>
-					<h4>Canadá</h4>
+					<div>
+						<h2>Toronto</h2>
+						<h4>Canadá</h4>
+					</div>
 					
 					<Lottie
-						animationData={animationData}
+						animationData={sun}
 						loop={true}
 						style={{ height: 150 }}
 					/>
 
-					<span>19° C</span>
-					<p>Parcialmente nublado</p>
+					<span className='temperature'>19° C</span>
+
+					<div className='weather-others'>
+						<TbDropletFilled size={20}/>
+						<span>68%</span>
+						<span>Parcialmente nublado</span>
+					</div>
 				</div>
 			</div>
 		</div>
