@@ -1,12 +1,8 @@
-import Lottie from 'lottie-react';
-
+import Form from 'components/Form';
+import Panel from 'components/Panel';
 import Slider from 'components/Slider/Slider';
 import { Slide, SliderProps } from 'components/Slider';
 
-import { BiSearch } from 'react-icons/bi';
-import { TbDropletFilled } from 'react-icons/tb';
-
-import rain from './animations/rain.json';
 import './App.css';
 
 function App() {
@@ -24,70 +20,52 @@ function App() {
 
 	return (
 		<main>
-			<div className='main-container'>
-				<div className='container'>
-					<div className='user-input'>
-						<h2>Busque o clima de algum lugar</h2>
-						<div className='user-search'>
-							<input type="text" required />
-							<button>
-								<BiSearch size={25} color={'#FFF'} />
-							</button>
-						</div>
-					</div>
+			<Form/>
 
-					<div className='divisor'></div>
-
-					<div className='main-content'>
-						<div>
-							<h2>Toronto</h2>
-							<h4>Canadá</h4>
-						</div>
-
-						<Lottie
-							animationData={rain}
-							loop={true}
-							style={{ height: 150 }}
-						/>
-
-						<span className='temperature'>19° C</span>
-
-						<div className='weather-others'>
-							<TbDropletFilled size={20} />
-							<span>68%</span>
-							<span>Parcialmente nublado</span>
-						</div>
-					</div>
-				</div>
-			</div>
+			<Panel
+				size='normal'
+				city='Toronto'
+				country='Canadá'
+				temperature='19° C'
+				humidity={68}
+				sky='Parcialmente nublado'
+			/>
 
 			<Slider settings={sliderSettings}>
 				<Slide>
-					<div className="mini-container">
-						<span>Toronto1</span>
-						<span>Canadá</span>
-					</div>
+					<Panel
+						size='mini'
+						city='Toronto'
+						country='Canadá'
+						temperature='19° C'
+					/>
 				</Slide>
 
 				<Slide>
-					<div className="mini-container">
-						<span>Toronto2</span>
-						<span>Canadá</span>
-					</div>
+					<Panel
+						size='mini'
+						city='Toronto'
+						country='Canadá'
+						temperature='19° C'
+					/>
 				</Slide>
 
 				<Slide>
-					<div className="mini-container">
-						<span>Toronto3</span>
-						<span>Canadá</span>
-					</div>
+					<Panel
+						size='mini'
+						city='Toronto'
+						country='Canadá'
+						temperature='19° C'
+					/>
 				</Slide>
 
 				<Slide>
-					<div className="mini-container">
-						<span>Toronto4</span>
-						<span>Canadá</span>
-					</div>
+					<Panel
+						size='mini'
+						city='Toronto'
+						country='Canadá'
+						temperature='19° C'
+					/>
 				</Slide>
 			</Slider>
 		</main>
