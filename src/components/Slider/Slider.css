@@ -10,3 +10,11 @@
 .swiper-button-prev::after, .swiper-button-next::after {
     font-size: 25px;
 }
+
+.swiper-button-prev::after {
+    margin-right: 12px;
+}
+
+.swiper-button-next::after {
+    margin-left: 12px;
+}
