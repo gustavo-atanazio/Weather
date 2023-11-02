@@ -22,8 +22,7 @@ function Panel({ size, city, country, temperature, humidity, sky }: PanelProps) 
                 padding={size === 'mini' ? 0 : ''}
             >
                 <div
-                    className={styles.content}
-                    style={size === 'mini' ? {flexDirection: 'row'} : {}}
+                    className={`${styles.content} ${size === 'mini' ? styles.content__mini : ''}`}
                 >
                     <div>
                         <h2>{city}</h2>
@@ -38,7 +37,7 @@ function Panel({ size, city, country, temperature, humidity, sky }: PanelProps) 
 
                     <span
                         className={styles.temperature}
-                        style={size === 'mini' ? {fontSize: '1.5rem'} : {}}
+                        style={size === 'mini' ? { fontSize: '1.5rem' } : {}}
                     >
                         {temperature}
                     </span>
