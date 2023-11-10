@@ -3,13 +3,18 @@ import { BiSearch } from "react-icons/bi";
 import Container from "components/Container";
 import styles from './Form.module.css';
 
-function Form() {
+interface FormProps {
+    setCity: React.Dispatch<React.SetStateAction<string>>
+}
+
+function Form({ setCity }: FormProps) {
     const [search, setSearch] = useState('');
     const searchIcon = useMemo(() => <BiSearch size={25} color={'#FFF'}/>, []);
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        console.log('pesquisa feita');
+        setCity(search);
+        setSearch('');
     }
 
     return (
@@ -25,7 +30,7 @@ function Form() {
                         required
                     />
 
-                    <button>
+                    <button type='submit'>
                         {searchIcon}
                     </button>
                 </div>
