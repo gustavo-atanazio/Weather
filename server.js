@@ -10,16 +10,19 @@ const app = express();
 
 app.use(cors());
 
-app.get('/', async (req, res) => {
+app.get('/weather', async (req, res) => {
     const API_KEY = process.env.WEATHER_API_KEY;
     const baseWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lang=pt_br&units=metric&appid=${API_KEY}`;
     const city = req.query.city;
 
-    try {
-        const response = await axios.get(`${baseWeatherURL}&q=${city}`);
-        res.json(response.data);
-    } catch (error) {
-        console.error(error);
+    if (city) {
+        try {
+            const response = await axios.get(`${baseWeatherURL}&q=${city}`);
+            res.json(response.data);
+        } catch (error) {
+            res.send(error);
+            console.error(error);
+        }
     }
 });
 
