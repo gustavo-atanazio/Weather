@@ -20,7 +20,7 @@ function Form({ setCity }: FormProps) {
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <Container>
-                <h2>Busque o clima de algum lugar</h2>
+                <h2>Busque o clima de alguma cidade</h2>
 
                 <div className={styles.user_search}>
                     <input
