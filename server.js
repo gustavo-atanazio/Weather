@@ -26,4 +26,18 @@ app.get('/weather', async (req, res) => {
     }
 });
 
+app.get('/weather-widget', async (req, res) => {
+    const API_KEY = process.env.WEATHER_WIDGET_API_KEY;
+    const baseURL = ` https://api.weatherapi.com/v1/current.json?lang=pt&key=${API_KEY}`;
+    const city = req.query.city;
+
+    try {
+        const response = await axios.get(`${baseURL}&q=${city}`);
+        res.json(response.data);
+    } catch (error) {
+        res.send(error);
+        console.error(error);
+    }
+});
+
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
