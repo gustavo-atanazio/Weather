@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Form from 'components/Form';
 import Panel from 'components/Panel';
+import MiniPanel from 'components/MiniPanel';
 import Slider from 'components/Slider/Slider';
 import { Slide, SliderProps } from 'components/Slider';
 
@@ -45,6 +46,7 @@ function App() {
 		} catch (error) {
 			alert('Ocorreu um erro.');
 			console.log(error);
+			setWeatherData(null);
 		}
 	}
 
@@ -56,50 +58,23 @@ function App() {
 		<main>
 			<Form setCity={setCity}/>
 
-			<Panel
-				size='normal'
-				city='Toronto'
-				country='Canadá'
-				temperature='19° C'
-				humidity={68}
-				sky='Parcialmente nublado'
-			/>
+			<Panel data={weatherData}/>
 
 			<Slider settings={sliderSettings}>
 				<Slide>
-					<Panel
-						size='mini'
-						city='Toronto'
-						country='Canadá'
-						temperature='19° C'
-					/>
+					{weatherData && <MiniPanel {...weatherData}/>}
 				</Slide>
 
 				<Slide>
-					<Panel
-						size='mini'
-						city='Toronto'
-						country='Canadá'
-						temperature='19° C'
-					/>
+					{weatherData && <MiniPanel {...weatherData}/>}
 				</Slide>
 
 				<Slide>
-					<Panel
-						size='mini'
-						city='Toronto'
-						country='Canadá'
-						temperature='19° C'
-					/>
+					{weatherData && <MiniPanel {...weatherData}/>}
 				</Slide>
 
 				<Slide>
-					<Panel
-						size='mini'
-						city='Toronto'
-						country='Canadá'
-						temperature='19° C'
-					/>
+					{weatherData && <MiniPanel {...weatherData}/>}
 				</Slide>
 			</Slider>
 		</main>
