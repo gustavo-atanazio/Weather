@@ -3,52 +3,51 @@ import { TbDropletFilled } from "react-icons/tb";
 
 import Container from "components/Container";
 
+import WeatherData from "types/WeatherData";
+
 import rain from 'animations/rain.json';
 import styles from './Panel.module.css';
 
 interface PanelProps {
-    size: 'normal' | 'mini'
-    city: string
-    country: string
-    temperature: string
-    humidity?: number
-    sky?: string
+    data: WeatherData | null
 }
 
-function Panel({ size, city, country, temperature, humidity, sky }: PanelProps) {
+function Panel({ data }: PanelProps) {
+    const { city, country, temperature, humidity, sky } = data || {};
+
     return (
         <div className={styles.panel}>
-            <Container
-                padding={size === 'mini' ? 0 : ''}
-            >
+            <Container>
                 <div
-                    className={`${styles.content} ${size === 'mini' ? styles.content__mini : ''}`}
+                    className={styles.content}
                 >
-                    <div>
-                        <h2>{city}</h2>
-                        <h4>{country}</h4>
-                    </div>
-
-                    <Lottie
-                        animationData={rain}
-                        loop={true}
-                        style={size === 'mini' ? { height: 100 } : { height: 150 }}
-                    />
-
-                    <span
-                        className={styles.temperature}
-                        style={size === 'mini' ? { fontSize: '1.5rem' } : {}}
-                    >
-                        {temperature}
-                    </span>
-
-                    {(humidity && sky) &&
-                        <div className={styles.others}>
-                            <TbDropletFilled size={20} />
-                            <span>{humidity}%</span>
-                            <span>{sky}</span>
-                        </div>
-                    }
+                    {data ? (
+                        <>
+                            <div>
+                                <h2>{city}</h2>
+                                <h4>{country}</h4>
+                            </div>
+        
+                            <Lottie
+                                animationData={rain}
+                                loop={true}
+                                style={{ height: 150 }}
+                            />
+        
+                            <span className={styles.temperature}>
+                                {temperature && Math.round(temperature)}° C
+                            </span>
+        
+                            
+                            <div className={styles.others}>
+                                <TbDropletFilled size={20} />
+                                <span>{humidity}%</span>
+                                <span>{sky && sky.charAt(0).toUpperCase() + sky.slice(1)}</span>
+                            </div>
+                        </>
+                    ) : (
+                        <p>Sem dados</p>
+                    )}
                 </div>
             </Container>
         </div>
