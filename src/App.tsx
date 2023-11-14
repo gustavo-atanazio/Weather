@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 import Form from 'components/Form';
 import Panel from 'components/Panel';
@@ -7,12 +6,18 @@ import MiniPanel from 'components/MiniPanel';
 import Slider from 'components/Slider/Slider';
 import { Slide, SliderProps } from 'components/Slider';
 
+import { getWeatherData } from 'utils/getWeatherData';
+import { getCitiesWeatherData } from 'utils/getCitiesWeatherData';
+
 import WeatherData from 'types/WeatherData';
+import { CITIES } from 'constants/cities';
+
 import './App.css';
 
 function App() {
 	const [city, setCity] = useState('');
 	const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+	const [weatherWidgetData, setWeatherWidgetData] = useState<WeatherData[]>([]);
 
 	const sliderSettings: SliderProps = {
 		autoplay: {
@@ -26,33 +31,19 @@ function App() {
 		spaceBetween: 15
 	};
 
-	async function getWeatherData(city: string) {
-		try {
-			const response = await axios.get('http://localhost:8000/weather', {
-				params: { city: city }
-			});
-
-			const data: WeatherData = {
-				city: response.data.name,
-				country: response.data.sys.country,
-				temperature: response.data.main.temp,
-				humidity: response.data.main.humidity,
-				sky: response.data.weather[0].description
-			};
-
-			if (data) {
-				setWeatherData(data);
-			}
-		} catch (error) {
-			alert('Ocorreu um erro.');
-			console.log(error);
-			setWeatherData(null);
-		}
-	}
+	useEffect(() => {
+		getWeatherData(city)
+			.then(data => setWeatherData(data))
+			.catch(error => console.error(error))
+	}, [city]);
 
 	useEffect(() => {
-		getWeatherData(city);
-	}, [city]);
+		const selectedCities = CITIES.sort(() => Math.random() - 0.5).slice(0, 4);
+
+		getCitiesWeatherData(selectedCities)
+			.then(data => setWeatherWidgetData(data))
+			.catch(error => console.error('Erro ao buscar dados do clima para as cidades', error));
+	}, []);
 
 	return (
 		<main>
@@ -61,21 +52,11 @@ function App() {
 			<Panel data={weatherData}/>
 
 			<Slider settings={sliderSettings}>
-				<Slide>
-					{weatherData && <MiniPanel {...weatherData}/>}
-				</Slide>
-
-				<Slide>
-					{weatherData && <MiniPanel {...weatherData}/>}
-				</Slide>
-
-				<Slide>
-					{weatherData && <MiniPanel {...weatherData}/>}
-				</Slide>
-
-				<Slide>
-					{weatherData && <MiniPanel {...weatherData}/>}
-				</Slide>
+				{weatherWidgetData.map((data, index) => (
+					<Slide key={index}>
+						<MiniPanel {...data}/>
+					</Slide>
+				))}
 			</Slider>
 		</main>
 	);
