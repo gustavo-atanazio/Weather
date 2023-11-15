@@ -7,7 +7,6 @@ import Slider from 'components/Slider/Slider';
 import { Slide, SliderProps } from 'components/Slider';
 
 import { getWeatherData } from 'utils/getWeatherData';
-import { getCitiesWeatherData } from 'utils/getCitiesWeatherData';
 
 import WeatherData from 'types/WeatherData';
 import { CITIES } from 'constants/cities';
@@ -32,15 +31,15 @@ function App() {
 	};
 
 	useEffect(() => {
-		getWeatherData(city)
-			.then(data => setWeatherData(data))
+		getWeatherData([city])
+			.then((data) => setWeatherData(data[0])) // Retornando objeto único
 			.catch(error => console.error(error))
 	}, [city]);
 
 	useEffect(() => {
-		const selectedCities = CITIES.sort(() => Math.random() - 0.5).slice(0, 4);
+		const randomCities = CITIES.sort(() => Math.random() - 0.5).slice(0, 4);
 
-		getCitiesWeatherData(selectedCities)
+		getWeatherData(randomCities)
 			.then(data => setWeatherWidgetData(data))
 			.catch(error => console.error('Erro ao buscar dados do clima para as cidades', error));
 	}, []);
@@ -63,3 +62,5 @@ function App() {
 }
 
 export default App;
+
+// Lógica para exibir as animações
