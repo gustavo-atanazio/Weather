@@ -4,4 +4,6 @@ export default interface WeatherData {
     temperature: number
     humidity: number
     sky: string
+    main: 'Clear' | 'Clouds' | 'Rain' | 'Thuderstorm' | 'Drizzle' | undefined
+    clouds: number
 }
