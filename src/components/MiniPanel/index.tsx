@@ -1,10 +1,10 @@
-import Lottie from "lottie-react";
 import Container from "components/Container";
+import Animation from "components/Animation";
+
 import WeatherData from "types/WeatherData";
-import rain from 'animations/rain.json';
 import styles from './MiniPanel.module.css';
 
-function MiniPanel({ city, country, temperature }: WeatherData) {
+function MiniPanel({ city, country, temperature, main, clouds }: WeatherData) {
     return (
         <div className={styles.mini_panel}>
             <Container padding={0}>
@@ -14,14 +14,14 @@ function MiniPanel({ city, country, temperature }: WeatherData) {
                         <h4>{country}</h4>
                     </div>
 
-                    <Lottie
-                        animationData={rain}
-                        loop={true}
-                        style={{ height: 100 }}
+                    <Animation
+                        height={100}
+                        main={main}
+                        clouds={clouds}
                     />
 
                     <span>
-                        {temperature && Math.round(temperature)}° C
+                        {Math.round(temperature)}° C
                     </span>
                 </div>
             </Container>

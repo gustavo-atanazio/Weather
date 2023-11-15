@@ -62,5 +62,3 @@ function App() {
 }
 
 export default App;
-
-// Lógica para exibir as animações

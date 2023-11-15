@@ -1,11 +1,10 @@
-import Lottie from "lottie-react";
 import { TbDropletFilled } from "react-icons/tb";
 
 import Container from "components/Container";
+import Animation from "components/Animation";
 
 import WeatherData from "types/WeatherData";
 
-import rain from 'animations/rain.json';
 import styles from './Panel.module.css';
 
 interface PanelProps {
@@ -13,7 +12,7 @@ interface PanelProps {
 }
 
 function Panel({ data }: PanelProps) {
-    const { city, country, temperature, humidity, sky } = data || {};
+    const { city, country, temperature, humidity, sky, main, clouds } = data || {};
 
     return (
         <div className={styles.panel}>
@@ -27,11 +26,11 @@ function Panel({ data }: PanelProps) {
                                 <h2>{city}</h2>
                                 <h4>{country}</h4>
                             </div>
-        
-                            <Lottie
-                                animationData={rain}
-                                loop={true}
-                                style={{ height: 150 }}
+
+                            <Animation
+                                height={150}
+                                main={main!}
+                                clouds={clouds!}
                             />
         
                             <span className={styles.temperature}>
