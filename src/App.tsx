@@ -7,6 +7,7 @@ import Slider from 'components/Slider/Slider';
 import { Slide, SliderProps } from 'components/Slider';
 
 import { getWeatherData } from 'utils/getWeatherData';
+import { getImageURL } from 'utils/getImageURL';
 
 import WeatherData from 'types/WeatherData';
 import { CITIES } from 'constants/cities';
@@ -15,6 +16,7 @@ import './App.css';
 
 function App() {
 	const [city, setCity] = useState('');
+	const [backgroundImage, setBackgroundImage] = useState('');
 	const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
 	const [weatherWidgetData, setWeatherWidgetData] = useState<WeatherData[]>([]);
 
@@ -31,10 +33,26 @@ function App() {
 	};
 
 	useEffect(() => {
-		getWeatherData([city])
-			.then((data) => setWeatherData(data[0])) // Retornando objeto único
-			.catch(error => console.error(error))
+		async function fetchData() {
+			try {
+				const [weather, imageUrl] = await Promise.all([
+					getWeatherData([city]),
+					getImageURL(city)
+				]);
+
+				setWeatherData(weather[0]);
+				setBackgroundImage(imageUrl);
+			} catch (error) {
+				console.error('Erro ao obter dados:', error);
+			}
+		}
+
+		fetchData();
 	}, [city]);
+
+	useEffect(() => {
+		document.body.style.backgroundImage = `url(${backgroundImage})`;
+	}, [backgroundImage]);
 
 	useEffect(() => {
 		const randomCities = CITIES.sort(() => Math.random() - 0.5).slice(0, 4);
