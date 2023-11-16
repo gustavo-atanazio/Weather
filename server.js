@@ -26,4 +26,20 @@ app.get('/weather', async (req, res) => {
     }
 });
 
+app.get('/image', async (req, res) => {
+    const API_KEY = process.env.IMAGE_API_KEY;
+    const baseURL = `https://api.unsplash.com/photos/random?content_filter=high&client_id=${API_KEY}`;
+    const city = req.query.city;
+    const orientation = req.query.orientation;
+
+    if (city) {
+        try {
+            const response = await axios.get(`${baseURL}&query=${city}&orientation=${orientation}`);
+            res.json(response.data);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    }
+});
+
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
