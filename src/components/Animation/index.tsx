@@ -12,8 +12,6 @@ interface AnimationProps {
 }
 
 function Animation({ height, main, clouds }: AnimationProps) {
-    console.log(main, clouds);
-
     function handleAnimation(main: string, clouds: number) {
         switch (main.toUpperCase()) {
             case 'CLEAR':
