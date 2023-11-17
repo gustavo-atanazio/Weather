@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "concurrently \"yarn server\" \" yarn build\"",
     "dev": "concurrently \"nodemon server.js\" \"vite\"",
     "server": "node server.js",
     "web": "vite",
