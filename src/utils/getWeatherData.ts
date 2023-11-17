@@ -2,12 +2,13 @@ import axios from "axios";
 import WeatherData from "types/WeatherData";
 
 export async function getWeatherData(cities: string[]) {
+    const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+    const baseURL = `https://api.openweathermap.org/data/2.5/weather?lang=pt_br&units=metric&appid=${API_KEY}`;
+
     try {
         const responses = await Promise.all(
             cities.map(async city => {
-                const response = await axios.get('http://localhost:8000/weather', {
-                    params: { city: city }
-                });
+                const response = await axios.get(`${baseURL}&q=${city}`);
 
                 const data: WeatherData = {
                     city: response.data.name,
