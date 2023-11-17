@@ -20,8 +20,9 @@ app.get('/weather', async (req, res) => {
             const response = await axios.get(`${baseURL}&q=${city}`);
             res.json(response.data);
         } catch (error) {
-            res.send(error);
+            res.status(500).send(error);
             console.error(error);
+            throw error;
         }
     }
 });
@@ -38,6 +39,7 @@ app.get('/image', async (req, res) => {
             res.json(response.data);
         } catch (error) {
             res.status(500).send(error);
+            throw error;
         }
     }
 });
