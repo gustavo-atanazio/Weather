@@ -26,7 +26,6 @@ export async function getWeatherData(cities: string[]) {
 
         return responses;
     } catch (error) {
-        alert('Ocorreu um erro.');
         console.log(error);
         throw error;
     }
