@@ -1,12 +1,13 @@
 import axios from "axios";
 
 export async function getImageURL(city: string) {
-    const API_KEY = import.meta.env.VITE_IMAGE_API_KEY;
-    const baseURL = `https://api.unsplash.com/photos/random?content_filter=high&client_id=${API_KEY}`;
+    const URL = import.meta.env.VITE_API_URL;
     const imageOrientation = window.screen.width >= 992 ? 'landscape' : 'portrait';
 
     try {
-        const response = await axios.get(`${baseURL}&query=${city}&orientation=${imageOrientation}`);
+        const response = await axios.get(`${URL}/image`, {
+            params: { city: city, orientation: imageOrientation }
+        });
 
         if (response.data.urls && response.data.urls.regular) {
             return response.data.urls.regular;
