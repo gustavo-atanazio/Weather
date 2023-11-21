@@ -1,6 +1,9 @@
 import { useMemo, useState } from "react";
 import { BiSearch } from "react-icons/bi";
+
 import Container from "components/Container";
+
+import { removeScript } from "utils/remove-script";
 import styles from './Form.module.css';
 
 interface FormProps {
@@ -13,7 +16,7 @@ function Form({ setCity }: FormProps) {
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        setCity(search);
+        setCity(removeScript(search));
         setSearch('');
     }
 
