@@ -57,9 +57,17 @@ function App() {
 	useEffect(() => {
 		const randomCities = CITIES.sort(() => Math.random() - 0.5).slice(0, 4);
 
-		getWeatherData(randomCities)
-			.then(data => setWeatherWidgetData(data))
-			.catch(error => console.error('Erro ao buscar dados do clima para as cidades', error));
+		async function fetchData() {
+			try {
+				const data = await getWeatherData(randomCities);
+				setWeatherWidgetData(data);
+			} catch (error) {
+				console.error('Erro ao buscar dados do clima para as cidades', error);
+				alert('Aguardando conexão. Recarregue a página.');
+			}
+		}
+
+		fetchData();
 	}, []);
 
 	return (
