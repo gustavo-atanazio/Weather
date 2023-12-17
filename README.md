@@ -1,8 +1,8 @@
 <h1 align='center'>Weather</h1>
 
 <div align='center'>
-    <img src='' width='750px' alt='Imagem do projeto'/>
-    <img src='' width='750px' alt='Imagem do projeto'/>
+    <img src='https://github.com/gustavo-atanazio/Weather/assets/124182846/d5aeaf3a-a75c-468c-b2fe-2b4d9453afb7' width='750px' alt='Imagem do projeto'/>
+    <img src='https://github.com/gustavo-atanazio/Weather/assets/124182846/eef471dd-26b9-4af4-ba34-b095fd271c67' width='750px' alt='Imagem do projeto'/>
 </div>
 
 <div align='center'>
