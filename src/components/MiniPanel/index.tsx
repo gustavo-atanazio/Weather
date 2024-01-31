@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import Container from "components/Container";
 import Animation from "components/Animation";
 
@@ -29,4 +31,4 @@ function MiniPanel({ city, country, temperature, main, clouds }: WeatherData) {
     )
 }
 
-export default MiniPanel;
+export default memo(MiniPanel);

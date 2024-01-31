@@ -7,7 +7,7 @@
 
     background-color: rgba(4, 13, 18, 0.5);
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(5px);
     border-radius: 10px;
 }
 
@@ -19,12 +19,17 @@
 
 .user_search input {
     width: 80%;
-    border: 1px solid #000;
+    border: none;
     border-radius: 5px;
     outline: 0;
     padding: 0.2rem 0.2rem 0.2rem 0.5rem;
     font-size: 1rem;
-    background-color: #EEE;
+    background-color: rgba(4, 5, 5, 0.5);
+    color: #CCC;
+}
+
+.user_search input:focus {
+    outline: 2px solid #777;
 }
 
 .user_search button {
